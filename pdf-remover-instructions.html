@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF Restriction Remover — Setup Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: 'Inter', sans-serif;
+    padding: 40px 24px;
+    font-size: 15px;
+  }
+  .page { max-width: 700px; margin: 0 auto; }
+
+  .header-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 3px;
+    text-transform: uppercase; color: #58a6ff; margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(24px, 4vw, 36px); font-weight: 700;
+    color: #ffffff; margin-bottom: 8px; letter-spacing: -0.5px;
+  }
+  .subtitle { font-size: 14px; color: #8b949e; margin-bottom: 36px; line-height: 1.6; }
+
+  .section { margin-bottom: 28px; }
+  .section-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+  }
+  .section-num {
+    background: #58a6ff; color: #0d1117;
+    font-size: 11px; font-weight: 700;
+    width: 24px; height: 24px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  h2 { font-size: 16px; font-weight: 600; color: #ffffff; }
+
+  .card {
+    background: #161b22; border: 1px solid #21262d;
+    border-radius: 12px; padding: 18px 22px;
+  }
+  .card p { font-size: 14px; color: #c9d1d9; line-height: 1.75; }
+
+  .steps { list-style: none; }
+  .steps li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 11px 0; border-bottom: 1px solid #21262d;
+    font-size: 14px; color: #c9d1d9; line-height: 1.65;
+  }
+  .steps li:last-child { border-bottom: none; padding-bottom: 0; }
+  .step-num {
+    background: #21262d; color: #58a6ff;
+    font-weight: 700; font-size: 12px;
+    width: 26px; height: 26px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .steps strong { color: #e6edf3; font-weight: 600; }
+
+  .code-block {
+    background: #0d1117; border: 1px solid #21262d;
+    border-radius: 8px; padding: 12px 16px;
+    font-size: 13px; color: #79c0ff;
+    font-family: 'Courier New', monospace;
+    margin: 10px 0 4px;
+    letter-spacing: 0.3px;
+  }
+
+  .highlight {
+    background: #1c2d3f; border: 1px solid #1f6feb;
+    border-radius: 10px; padding: 14px 18px; margin-top: 12px;
+  }
+  .highlight p { font-size: 13px; color: #a5d3ff; line-height: 1.7; }
+  .highlight strong { color: #ffffff; }
+
+  .warning {
+    background: #2d1f0a; border: 1px solid #e3b341;
+    border-radius: 10px; padding: 14px 18px; margin-top: 12px;
+  }
+  .warning p { font-size: 13px; color: #e3b341; line-height: 1.7; }
+
+  .success {
+    background: #0f2d1a; border: 1px solid #3fb950;
+    border-radius: 10px; padding: 14px 18px; margin-top: 12px;
+  }
+  .success p { font-size: 13px; color: #7ee787; line-height: 1.7; }
+  .success strong { color: #ffffff; }
+
+  .footer {
+    margin-top: 36px; padding-top: 18px;
+    border-top: 1px solid #21262d;
+    font-size: 12px; color: #484f58;
+    text-align: center; letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header-label">Setup Guide · Windows</div>
+  <h1>PDF Restriction Remover</h1>
+  <p class="subtitle">One-time setup, then double-click to run anytime. Processes your entire folder at once and never touches your originals.</p>
+
+  <!-- STEP 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>Check if Python is Already Installed</h2>
+    </div>
+    <div class="card">
+      <ol class="steps">
+        <li><div class="step-num">1</div><span>Press <strong>Windows key + R</strong> on your keyboard</span></li>
+        <li><div class="step-num">2</div><span>Type <strong>cmd</strong> and press Enter — a black window opens</span></li>
+        <li><div class="step-num">3</div><span>Type this exactly and press Enter:</span></li>
+      </ol>
+      <div class="code-block">python --version</div>
+      <div class="highlight">
+        <p><strong>If you see something like "Python 3.x.x"</strong> — great, skip to Step 2.<br>
+        <strong>If you see an error</strong> — Python isn't installed yet. Go to <strong>python.org</strong>, click the big yellow Download button, run the installer. <em>Important: check the box that says "Add Python to PATH"</em> before clicking Install.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>Install the Required Library (One Time Only)</h2>
+    </div>
+    <div class="card">
+      <p>In the same black Command Prompt window, type this and press Enter:</p>
+      <div class="code-block">pip install pypdf</div>
+      <p style="margin-top:10px;">You'll see some text downloading and installing. Wait for it to finish — usually under 30 seconds.</p>
+      <div class="success">
+        <p><strong>You only ever need to do this once.</strong> The library stays installed on your computer permanently.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>Put the Script Somewhere Easy to Find</h2>
+    </div>
+    <div class="card">
+      <ol class="steps">
+        <li><div class="step-num">1</div><span>Save the file <strong>pdf_restriction_remover.py</strong> somewhere easy — your Desktop or Documents folder works well</span></li>
+        <li><div class="step-num">2</div><span>Also save this to your own GitHub repository so you never lose it</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>Run It</h2>
+    </div>
+    <div class="card">
+      <ol class="steps">
+        <li><div class="step-num">1</div><span><strong>Double-click</strong> the pdf_restriction_remover.py file to open it</span></li>
+        <li><div class="step-num">2</div><span>A window appears asking for your PDF folder path</span></li>
+        <li><div class="step-num">3</div><span>Open File Explorer, find your bank statements folder, and <strong>drag the folder</strong> into the window — the path fills in automatically</span></li>
+        <li><div class="step-num">4</div><span>Press <strong>Enter</strong> and watch it process every file</span></li>
+        <li><div class="step-num">5</div><span>When done, look inside your statements folder for a new subfolder called <strong>"unlocked"</strong> — your renamed files are in there</span></li>
+      </ol>
+      <div class="warning">
+        <p>If double-clicking doesn't open a window, right-click the file instead → <strong>Open with</strong> → <strong>Python</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>What You Get</h2>
+    </div>
+    <div class="card">
+      <ol class="steps">
+        <li><div class="step-num">✓</div><span>Every PDF processed and saved as <strong>originalname_pwd_rmvd.pdf</strong></span></li>
+        <li><div class="step-num">✓</div><span>All files in a clean <strong>"unlocked"</strong> subfolder</span></li>
+        <li><div class="step-num">✓</div><span>Your <strong>originals untouched</strong> — exactly as they were</span></li>
+        <li><div class="step-num">✓</div><span>Unlocked files are now fully searchable and ready to redact in Adobe</span></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="footer">
+    Made with Claude &nbsp;·&nbsp; Windows · Python 3
+  </div>
+
+</div>
+</body>
+</html>
